@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Proxies.Internal;
 using System;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 
@@ -10,13 +11,15 @@ namespace Models
     {
         public DatabasecoreContext()
         {
+            
         }
 
         public virtual DbSet<Credit> Credit { get; set; }
         public virtual DbSet<Notice> Notice { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbQuery<LayoutView> LayoutView { get; set; }
-        
+        public virtual DbSet<VNoticeCredit> VNoticeCredit { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -27,6 +30,14 @@ namespace Models
                     .UseSqlServer(strCtx)
                     .UseLazyLoadingProxies();
             }
+        }
+
+        public int InsCredit(int creditId, string title, DateTime dateCreated)
+        {
+            var CreditId = new SqlParameter("CreditId", creditId);
+            var Title = new SqlParameter("Title", title);
+            var DateCreated = new SqlParameter("DateCreated", dateCreated);                    
+            return Database.ExecuteSqlCommand("InsCredit @CreditId, @Title, @DateCreated", CreditId, Title, DateCreated);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -44,8 +55,8 @@ namespace Models
             modelBuilder.Entity<Credit>(entity =>
             {
                 entity.Property(e => e.Name).HasMaxLength(50);
-                entity.Property(e => e.Status)
-                    .HasConversion<string>();/*
+                entity.Property(e => e.Status).HasConversion<string>();
+                /*
                     .HasConversion(new CreditStateValueConverter(
                                 to => Enum.GetName(typeof(State), to), 
                                 from => Enum.Parse<State>(from)));*/
@@ -76,7 +87,11 @@ namespace Models
                         Text = s.Name                      
                     }));
 
-            
+            modelBuilder.Entity<VNoticeCredit>(entity =>
+            {
+                entity.ToTable("VNoticeCredit");                
+            });            
+
         }
     }
 }

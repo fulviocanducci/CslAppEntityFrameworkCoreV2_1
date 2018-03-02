@@ -12,7 +12,7 @@ namespace CslAppEntityFrameworkCoreV2_1
         {
             using (DatabasecoreContext db = new DatabasecoreContext())
             {
-                var a = db.Credit.ToArray();
+                //var a = db.Credit.ToArray();
 
 
                 //var notice = db.Notice                    
@@ -50,6 +50,11 @@ namespace CslAppEntityFrameworkCoreV2_1
                 //    .ToList();
 
                 //var a = db.LayoutView.ToList();
+                //var b = db.VNoticeCredit.Where(x => x.Id == 1).FirstOrDefault();
+
+                //db.SaveChanges();
+
+                var count = db.InsCredit(2, "Store Change", DateTime.Now.AddDays(-2));
 
             }
             Console.WriteLine("Hello World!");
