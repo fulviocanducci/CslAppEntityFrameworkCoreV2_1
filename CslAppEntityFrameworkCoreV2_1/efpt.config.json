@@ -1,0 +1,1 @@
+﻿{"ContextClassName":"DatabasecoreContext","DefaultDacpacSchema":null,"IdReplace":false,"IncludeConnectionString":true,"OutputPath":"Models","ProjectRootNamespace":"Models","SelectedToBeGenerated":0,"Tables":["dbo.Credit","dbo.Notice"],"UseDatabaseNames":false,"UseFluentApiOnly":true,"UseHandleBars":false,"UseInflector":false}
