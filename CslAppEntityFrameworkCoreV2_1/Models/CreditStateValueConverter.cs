@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Microsoft.EntityFrameworkCore.Storage.Converters;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+
 namespace Models
 {
     public class CreditStateValueConverter : ValueConverter<State, string>

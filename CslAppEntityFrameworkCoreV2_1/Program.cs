@@ -1,17 +1,25 @@
 ﻿using Models;
 using System;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Proxies;
-using Microsoft.EntityFrameworkCore.Proxies.Internal;
+using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.Extensions.Logging;
+using System.Linq;
+
 namespace CslAppEntityFrameworkCoreV2_1
 {
     class Program
     {
         static void Main(string[] args)
         {
+                        
+            ILoggerFactory loggerFactory = new LoggerFactory();
+            DiagnosticsLogger<DbLoggerCategory.Infrastructure> logger =
+                new DiagnosticsLogger<DbLoggerCategory.Infrastructure>(loggerFactory, null, null);
+
             using (DatabasecoreContext db = new DatabasecoreContext())
             {
+
+                #region a
                 //var a = db.Credit.ToArray();
 
 
@@ -54,7 +62,19 @@ namespace CslAppEntityFrameworkCoreV2_1
 
                 //db.SaveChanges();
 
-                var count = db.InsCredit(2, "Store Change", DateTime.Now.AddDays(-2));
+                //People p = new People(0, "Mary", false);
+                //db.People.Add(p);
+                //db.SaveChanges();
+
+                //var peoples = db.People.ToList();
+
+                //var v1 = db.VNoticeCredit.Where(x => x.Id == 1).FirstOrDefault();
+                //var v2 = db.VNoticeCredit.Where(x => x.Status == "Active").ToList();                
+                #endregion
+
+                var itens = db.VNoticeCredit.ToList();
+                var usr1 = db.User.Find(1);
+                //var usr = new User(new LazyLoader(new CurrentDbContext(db),logger));
 
             }
             Console.WriteLine("Hello World!");
