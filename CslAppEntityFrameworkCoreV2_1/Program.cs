@@ -77,6 +77,7 @@ namespace CslAppEntityFrameworkCoreV2_1
                 //var usr = new User(new LazyLoader(new CurrentDbContext(db),logger));
 
             }
+
             Console.WriteLine("Hello World!");
         }
     }
